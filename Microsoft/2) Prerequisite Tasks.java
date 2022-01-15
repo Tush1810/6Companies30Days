@@ -110,5 +110,4 @@ class Solution {
         }
         return graph.topoLogicalSort();
     }
-
 }
