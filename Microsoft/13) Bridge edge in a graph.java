@@ -8,22 +8,16 @@ class Solution {
         adj.get(c).remove(new Integer(d));
         adj.get(d).remove(new Integer(c));
         isVisited = new boolean[V];
-        if (isConnected(c, d, adj)) return 0;
+        dfs(c, d, adj);
+        if (isVisited[d]) return 0;
         return 1;
     }
-
-    static boolean isConnected(int i, int v, ArrayList<ArrayList<Integer>> adj) {
-        dfs(i, adj);
-        if (!isVisited[v])
-            return false;
-        return true;
-    }
-
-    private static void dfs(int i, ArrayList<ArrayList<Integer>> adj) {
+    private static void dfs(int i, int d, ArrayList<ArrayList<Integer>> adj) {
         isVisited[i] = true;
+        if (d == i) return;
         for (Integer next : adj.get(i)) {
             if (isVisited[next]) continue;
-            dfs(next, adj);
+            dfs(next, d, adj);
         }
     }
 }
