@@ -2,6 +2,7 @@
     https://leetcode.com/problems/split-array-largest-sum/submissions/
 */
 
+// dp-> O(n*m)->space,time
 class Solution {
     int[] prefix;
     int[][] dp;
@@ -35,5 +36,38 @@ class Solution {
             } else minSum = Math.min(minSum, Math.max(largestSum, temp));
         }
         return dp[pos][m] = minSum;
+    }
+}
+
+
+// binary search-> O(n*logn)->time , O(1)-> space
+class Solution {
+    public int splitArray(int[] nums, int m) {
+        int start = nums[0], end = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            start = Math.max(nums[i], start);
+            end += nums[i];
+        }
+        int ans = end;
+        while (start <= end) {
+            int mCount = 0, sum = 0, maxVal = 0, mid = (start + end) / 2;
+
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] + sum > mid) {
+                    mCount++;
+                    sum = nums[i];
+                } else {
+                    sum += nums[i];
+                }
+                maxVal = Math.max(sum, maxVal);
+            }
+            if (mCount < m) {
+                ans = Math.min(maxVal, ans);
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return ans;
     }
 }
