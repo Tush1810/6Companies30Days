@@ -24,8 +24,7 @@ class Solution {
             return (int)((-1l << 31));
         }
         if (ans >= ((1l << 31) - 1)) {
-            return (int)((1l <<
-                          31) - 1);
+            return (int)((1l << 31) - 1);
         }
         return (int)ans;
     }
