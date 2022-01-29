@@ -5,6 +5,7 @@
 class Solution {
     public int divide(int dividend, int divisor) {
         long ans = 0;
+
         boolean isNeg = ((dividend < 0) ^ (divisor < 0));
         long a = dividend, b = divisor;
         if (dividend < 0) {
